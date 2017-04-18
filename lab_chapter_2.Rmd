@@ -1,16 +1,224 @@
 ---
-title: "R Notebook"
+title: "Introduction to Statistical Learning: Lab Chapter 2"
 output: html_notebook
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+---
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+###Basic Commands
+
+---
+
+Use `c()` to create a vector:
 
 ```{r}
-plot(cars)
+x <- c(1, 3, 2, 5)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+Use `<-` or `=` to save content to an object:
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+```{r}
+x = c(1, 6, 2)
+
+y <- c(1, 4, 3)
+```
+
+Use `length()` to check the length of vector:
+
+```{r}
+length(x)
+
+length(y)
+```
+
+Adding two vectors of similar length will add the elements in the first vector to the respective elements in the second vector:
+
+```{r}
+x + y
+```
+
+Use `ls()` to look at a list of all objects in the current working environment:
+
+```{r}
+ls()
+```
+
+Use `rm()` to delete any elements in the working environment:
+
+```{r}
+rm(x, y)
+
+ls()
+```
+
+Use `rm()` with `ls()` to remove all objects at once:
+
+```{r}
+rm(list=ls())
+```
+
+Use `matrix()` to create a matrix of numbers:
+
+```{r}
+x <- matrix(data = c(1,2,3,4), nrow = 2, ncol = 2)
+```
+
+Use `sqrt` to return the square root of each element in a vector or matrix:
+
+```{r}
+sqrt(x)
+```
+
+Use `rnorm()` to generate a vector of random normal variables:
+
+```{r}
+x <- rnorm(n = 10)
+y <- x + rnorm(n = 10, mean = 50, sd = 0.1)
+```
+
+Use `cor()` to compute the correlation between two vectors:
+
+```{r}
+cor(x, y)
+```
+
+Use `set.seed()` to set the seed for random number generators.  This ensures code is reproducible:
+
+```{r}
+set.seed(4)
+```
+
+Use `mean()` , `var()` , and `sd()` to compute the mean, variance and standard deviation of a vector respectively:
+
+```{r}
+mean(x)
+var(x)
+sd(x)
+```
+
+---
+
+###Graphics
+
+---
+
+Use the `plot()` function as the basic way to produce plots in R:
+
+```{r}
+x <- rnorm(100)
+y <- rnorm(100)
+plot(x, y)
+plot(x, y, xlab = "this is the x-axis", ylab = "this is the y-axis", main = "this is the title")
+```
+
+Use `pdf()` or `jpeg()` to save plots to file:
+
+```{r eval = FALSE}
+pdf("Figure.pdf")
+plot(x, y)
+dev.off()
+```
+
+The function `dev.off()` indicates to R that we are done with the plot we are saving to file.
+
+Use `seq(a, b)` to create a sequence of numbers between `a` and `b`:
+
+```{r}
+x <- seq(1, 10)
+x
+```
+
+
+USe `contour()` to create a contour plot representing 3-dimensional data:
+
+```{r}
+y <- x
+
+f <- outer(x, y, function(x, y) cos(y) / (1 + x ^ 2))
+contour(x, y, f)
+```
+
+Use `image()` to create a heatmap in base R:
+
+```{r}
+image(x, y, f)
+```
+
+Use `persp()` to create a 3-dimensional plot in base R:
+
+```{r}
+persp(x, y, f)
+```
+
+---
+
+###Indexing Data
+
+---
+
+Given a matrix `A`:
+
+```{r}
+A <- matrix(1:16, 4, 4)
+```
+
+Use `A[2,3]` to select the element in row 2 column 3 of the matrix:
+
+```{r}
+A[2,3]
+```
+
+Use `A[1, ]` to select all elements in row 1 of the matrix:
+
+```{r}
+A[1, ]
+```
+
+Use a `-` sign in the index to tell R to keep all elements except those indicated in the index:
+
+```{r}
+A[-1, ]
+```
+
+Use `dim()` to output the number of rows and columns of a matrix:
+
+```{r}
+dim(A)
+```
+
+
+---
+
+###Loading Data
+
+---
+
+This section contains mostly unused base R commands.  
+
+
+---
+
+###Additional Graphical and Numerical Summaries
+
+---
+
+Use `pairs()` to craete a scatterplot matrix for every pair of data in a given data set.
+
+```{r}
+pairs(mtcars)
+```
+
+Use `identify()` to make base R plots more interactive enabing one to print the value of a variable of interest by clicking it on a plot.
+
+Use `summary()` to produce a numerical summary of each variable in a particular data set:
+
+```{r}
+summary(mtcars)
+```
+
+Use `q()` to quite R.
+
+
+
+
+
